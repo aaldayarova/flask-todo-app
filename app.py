@@ -22,15 +22,19 @@ class Todo(db.Model):
 
 
 # Creating an index page for the website and routing it to the default URL via '/'
+# CONCEPT #1 - Routing
 @app.route('/')
 def index():
 
     # Show all todos
     todo_list = Todo.query.all()
     print(todo_list)
+
+    # CONCEPT #3 - Templates
     return render_template('base.html', todo_list = todo_list)
 
 # Creating functionality for the "add" button 
+# CONCEPT #2 - HTTP Requests
 @app.route('/add', methods = ["POST"])
 def add():
 
