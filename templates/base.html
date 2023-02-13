@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo app</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+</head>
+<body>
+    <div class="ui container" style="margin-top: 50px;">
+
+    <h1 class="ui center aligned header">Todo(tion) App</h1>
+
+    <!-- Whenever we add an item, the action will be linked to the "add" route -->
+    <form class="ui form" action="/add" method="post">
+        <!-- <div> is a container for HTML elements -->
+        <div class="field">
+            <label for="title">Todo Title</label>
+            <input type="text" name="title" placeholder="Don't be shy, add a task!">
+            <br>
+            <button class="ui blue button" type="submit">Add</button>
+        </div>
+    </form>
+
+    <!-- Showing the todo database items on the webpage and not just the terminal, using Jinja -->
+    <!-- Using the Semantic UI class tags to bring in nice styling for our functionalities -->
+    {% for todo in todo_list %}
+    <div class="ui segment">
+        <p class="big header">{{ todo.id }} | {{ todo.title }}</p>
+        
+        {% if todo.complete == False %}
+            <span class="ui gray label">Not Done Yet!</span>
+        {% else %}
+            <span class="ui green label">Done!</span>
+        {% endif %}
+
+        <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
+        <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+    
+    </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
